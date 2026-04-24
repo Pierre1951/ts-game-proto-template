@@ -48,18 +48,7 @@
       "denyRead": ["~/.ssh", "~/.gnupg", "~/.aws"]
     },
     "network": {
-      "allowedDomains": [
-        "github.com",
-        "*.github.com",
-        "api.github.com",
-        "objects.githubusercontent.com",
-        "api.anthropic.com",
-        "registry.npmjs.org",
-        "*.npmjs.org",
-        "*.vercel.app",
-        "vercel.com",
-        "api.vercel.com"
-      ],
+      "allowedDomains": ["*"],
       "allowLocalBinding": true
     }
   }
