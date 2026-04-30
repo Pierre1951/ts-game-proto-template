@@ -1,0 +1,37 @@
+services:
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    user: vscode
+    working_dir: /workspace
+    volumes:
+      - .:/workspace:cached
+      # VPS ホストの ~/.claude/ を devcontainer の vscode ユーザー HOME 配下にマウント。
+      # claude-config repo の中身 (CLAUDE.md / settings.json / agents/ 等) はここに展開される (dotfiles 等価)。
+      # ホスト側に /home/ubuntu/.claude が存在しない環境 (init-devenv 経由でない直接利用) では
+      # 空ディレクトリがマウントされるため、Claude Code は user-level 設定なしで起動する。
+      - /home/ubuntu/.claude:/home/vscode/.claude:cached
+      # 永続化キャッシュ (再起動後も維持)
+      - playwright-cache:/home/vscode/.cache/ms-playwright
+      - npm-cache:/home/vscode/.npm
+    environment:
+      - GITHUB_TOKEN=${GITHUB_TOKEN:-}
+      - CLAUDE_CODE_OAUTH_TOKEN=${CLAUDE_CODE_OAUTH_TOKEN:-}
+      # bypassPermissions モードの安全装置 (本 VPS はサンドボックス用途、ディスポーザブル前提)
+      - IS_SANDBOX=1
+    # Playwright の chromium 起動で必要 (--ipc=host 推奨、--init で zombie プロセス回避)
+    ipc: host
+    init: true
+    ports:
+      - "5173:5173"
+    command: sleep infinity
+    networks:
+      - dev-net
+
+volumes:
+  playwright-cache:
+  npm-cache:
+
+networks:
+  dev-net:
