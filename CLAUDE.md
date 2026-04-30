@@ -1,5 +1,9 @@
 # プロジェクト指針
 
+<!-- INIT_DEVENV_SPEC_REF_START -->
+<!-- このマーカー間を init-devenv が SPEC.md 参照ブロックで上書きします。手動編集不要。 -->
+<!-- INIT_DEVENV_SPEC_REF_END -->
+
 このリポジトリは **TypeScript + Vite** によるブラウザ実行型のゲームロジック検証環境です。
 
 ---
