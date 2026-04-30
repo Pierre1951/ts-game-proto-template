@@ -1,6 +1,6 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from "@playwright/test";
 
-test('top page renders', async ({ page }) => {
-  await page.goto('/');
-  await expect(page.locator('body')).toBeVisible();
+test("top page renders", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.locator("body")).toBeVisible();
 });
